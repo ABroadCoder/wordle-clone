@@ -5,18 +5,28 @@ body {
 
 #title {
   justify-self: center;
+  font-size: 60px;
 }
 
 #board {
-  background-color: green;
+  background-color: lightblue;
   height: 600px;
   width: 500px;
-  border: solid green 2px;
+  border: solid lightblue 2px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   justify-self: center;
+}
+
+#answer {
+  color: black;
+  opacity: 0;
+  border: solid black 1px;
+  width: auto;
+  justify-self: center;
+  font-size: 60px;
 }
 
 hr {
@@ -30,11 +40,26 @@ hr {
   width: 96px;
   /* border: solid grey 1px; */
   margin: 2px;
-  background-color: white;
-  color: red;
+  color: white;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   font-size: 60px;
+}
+
+.neutral {
+  background-color: rgb(15, 15, 17);
+}
+
+.absent {
+  background-color: grey;
+}
+
+.present {
+  background-color: yellow;
+}
+
+.correct {
+  background-color: limegreen;
 }
