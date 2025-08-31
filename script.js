@@ -1,6 +1,6 @@
 const board = document.getElementById('board');
 
-const answer = 'TABLE';
+const answer = 'CANNY';
 
 let gameOver = false;
 let row = 0;
@@ -23,6 +23,17 @@ function initialize() {
   }
 
   document.getElementById('answer').textContent = answer;
+
+  // Count number of each letter in the answer word
+  let letterList = {};
+
+  for (i = 0; i < answer.length; i++) {
+    letterList[answer[i]]
+      ? (letterList[answer[i]] += 1)
+      : (letterList[answer[i]] = 1);
+  }
+
+  console.log(letterList);
 
   // console.log(`tile${row}-${column}`, typeof `tile${row}-${column}`);
 }
