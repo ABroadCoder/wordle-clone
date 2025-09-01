@@ -1,6 +1,6 @@
 const board = document.getElementById('board');
 
-const answer = 'CANNY';
+const answer = 'HELLO';
 
 let gameOver = false;
 let row = 0;
@@ -24,7 +24,7 @@ function initialize() {
     }
   }
 
-  document.getElementById('answer').textContent = answer;
+  document.getElementById('answer').textContent = `Answer: ${answer}`;
 
   // Count number of each letter in the answer word
 
@@ -128,7 +128,8 @@ document.addEventListener('keyup', function (e) {
       }
     }
 
-    if (gameOver === true) {
+    if (gameOver === true && numberCorrect < 5) {
+      document.getElementById('title').textContent = 'YOU LOST!';
       document.getElementById('answer').style.opacity = 1;
     }
   }
