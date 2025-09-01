@@ -6,6 +6,7 @@ let gameOver = false;
 let row = 0;
 let column = 0;
 let numberCorrect = 0;
+let letterList = {};
 
 function initialize() {
   gameOver = false;
@@ -19,13 +20,13 @@ function initialize() {
       tile.setAttribute('id', `tile${i}-${j}`);
       tile.classList.add('tile', 'neutral');
       board.appendChild(tile);
+      console.log(tile.id);
     }
   }
 
   document.getElementById('answer').textContent = answer;
 
   // Count number of each letter in the answer word
-  let letterList = {};
 
   for (i = 0; i < answer.length; i++) {
     letterList[answer[i]]
@@ -68,35 +69,37 @@ document.addEventListener('keyup', function (e) {
 
         // Updating tile colors to indicate guess accuracy
         for (i = 0; i < answer.length; i++) {
+          let tile = document.getElementById(`tile${row}-${i}`);
+          let letter = tile.textContent;
+          console.log(letter);
+
           // Indicate correct letter
-          if (
-            document.getElementById(`tile${row}-${i}`).textContent === answer[i]
-          ) {
+          if (letter === answer[i]) {
             numberCorrect++;
-            document.getElementById(`tile${row}-${i}`).classList.add('correct');
-            document
-              .getElementById(`tile${row}-${i}`)
-              .classList.remove('neutral');
+            letterList[letter] -= 1;
+            tile.classList.add('correct');
+            tile.classList.remove('neutral');
+          } else {
+            tile.classList.add('absent');
           }
+        }
+        for (i = 0; i < answer.length; i++) {
+          let tile = document.getElementById(`tile${row}-${i}`);
+          let letter = tile.textContent;
+
           // Indicate included letter with wrong position
-          if (
-            document.getElementById(`tile${row}-${i}`).textContent !==
-              answer[i] &&
-            answer.includes(
-              document.getElementById(`tile${row}-${i}`).textContent
-            )
-          ) {
-            document.getElementById(`tile${row}-${i}`).classList.add('present');
-            document
-              .getElementById(`tile${row}-${i}`)
-              .classList.remove('neutral');
+          if (letter !== answer[i] && answer.includes(letter)) {
+            if (letterList[letter] > 0) {
+              tile.classList.add('present');
+              tile.classList.remove('neutral');
+            }
+
+            letterList[letter] -= 1;
           }
           // Indicate incorrect letter
           else {
-            document.getElementById(`tile${row}-${i}`).classList.add('absent');
-            document
-              .getElementById(`tile${row}-${i}`)
-              .classList.remove('neutral');
+            tile.classList.add('absent');
+            tile.classList.remove('neutral');
           }
         }
         // Check win condition
@@ -109,6 +112,15 @@ document.addEventListener('keyup', function (e) {
           row++;
           column = 0;
         }
+      }
+
+      // Reset letterList object for counting new row's letters
+
+      letterList = {};
+      for (i = 0; i < answer.length; i++) {
+        letterList[answer[i]]
+          ? (letterList[answer[i]] += 1)
+          : (letterList[answer[i]] = 1);
       }
 
       if (column === 5 && row === 5) {
