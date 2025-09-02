@@ -2,6 +2,12 @@ const board = document.getElementById('board');
 
 const answer = 'HELLO';
 
+const keyboardContent = [
+  ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+  ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+  ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫'],
+];
+
 let gameOver = false;
 let row = 0;
 let column = 0;
@@ -14,6 +20,7 @@ function initialize() {
   column = 0;
   numberCorrect = 0;
 
+  // Create and assign IDs to board tiles
   for (i = 0; i <= 5; i++) {
     for (j = 0; j <= 4; j++) {
       let tile = document.createElement('span');
@@ -23,6 +30,25 @@ function initialize() {
       console.log(tile.id);
     }
   }
+
+  // Create and assign IDs to keyboard keys
+  for (i = 0; i < keyboardContent.length; i++) {
+    for (j = 0; j < keyboardContent[i].length; j++) {
+      let key = document.createElement('span');
+      key.setAttribute('id', `key-${keyboardContent[i][j]}`);
+      key.textContent = keyboardContent[i][j];
+      key.classList.add('key', 'neutral');
+      document.getElementById('keyboard').appendChild(key);
+      console.log(key.id);
+    }
+  }
+
+  // Make ENTER and BACKSPACE keys wide, adjust font sizes
+  document.getElementById('key-ENTER').classList.add('wide-key');
+  document.getElementById('key-ENTER').style.fontSize = '15px';
+
+  document.getElementById('key-⌫').classList.add('wide-key');
+  document.getElementById('key-⌫').style.fontSize = '20px';
 
   document.getElementById('answer').textContent = `Answer: ${answer}`;
 
@@ -39,8 +65,10 @@ function initialize() {
   // console.log(`tile${row}-${column}`, typeof `tile${row}-${column}`);
 }
 
+// Call iniitialization function to set up game
 initialize();
 
+// Detect and react to key presses
 document.addEventListener('keyup', function (e) {
   console.log(e.code);
 
@@ -71,27 +99,42 @@ document.addEventListener('keyup', function (e) {
         for (i = 0; i < answer.length; i++) {
           let tile = document.getElementById(`tile${row}-${i}`);
           let letter = tile.textContent;
+          let key = document.getElementById(`key-${letter}`);
           console.log(letter);
 
           // Indicate correct letter
           if (letter === answer[i]) {
             numberCorrect++;
+
             letterList[letter] -= 1;
+
             tile.classList.add('correct');
             tile.classList.remove('neutral');
-          } else {
+
+            key.classList.add('correct');
+            key.classList.remove('neutral');
+          }
+
+          // Mark absent the ones which the 'present' condition will miss due to letterList count
+          else {
             tile.classList.add('absent');
+            key.classList.add('absent');
           }
         }
+
         for (i = 0; i < answer.length; i++) {
           let tile = document.getElementById(`tile${row}-${i}`);
           let letter = tile.textContent;
+          let key = document.getElementById(`key-${letter}`);
 
           // Indicate included letter with wrong position
           if (letter !== answer[i] && answer.includes(letter)) {
             if (letterList[letter] > 0) {
               tile.classList.add('present');
               tile.classList.remove('neutral');
+
+              key.classList.add('present');
+              key.classList.remove('neutral');
             }
 
             letterList[letter] -= 1;
@@ -100,6 +143,9 @@ document.addEventListener('keyup', function (e) {
           else {
             tile.classList.add('absent');
             tile.classList.remove('neutral');
+
+            key.classList.add('absent');
+            key.classList.remove('neutral');
           }
         }
         // Check win condition
