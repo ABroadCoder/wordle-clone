@@ -1,17 +1,25 @@
+:root {
+  /* --background-color: rgb(224, 222, 222);
+  --text-color: rgb(39, 39, 75); */
+
+  --background-color: rgb(14, 37, 26);
+  --text-color: rgb(250, 84, 24);
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  background-color: rgb(14, 37, 26);
+  background-color: var(--background-color);
 }
 
 #title {
   justify-self: center;
   font-size: 50px;
-  color: rgb(250, 84, 24);
+  color: var(--text-color);
 }
 
 #board {
-  background-color: rgb(11, 28, 20);
+  background-color: var(--background-color);
   width: 320px;
   height: 384px;
   /* border: solid 2px; */
@@ -27,7 +35,7 @@ body {
 #keyboard {
   height: 192px;
   width: 440px;
-  background-color: rgb(14, 37, 26);
+  background-color: var(--background-color);
   /* border: solid 2px; */
   display: flex;
   flex-wrap: wrap;
@@ -38,7 +46,7 @@ body {
 }
 
 #answer {
-  color: rgb(250, 84, 24);
+  color: var(--text-color);
   opacity: 0;
   /* border: solid rgb(57, 50, 41) 1px; */
   width: auto;
@@ -60,7 +68,7 @@ hr {
   width: 60px;
   /* border: solid grey 1px; */
   margin: 2px;
-  color: rgb(250, 84, 24);
+  color: var(--text-color);
   display: flex;
   flex-wrap: wrap;
   align-content: center;
@@ -72,7 +80,7 @@ hr {
   height: 60px;
   width: 40px;
   border-radius: 10px;
-  color: rgb(250, 84, 24);
+  color: var(--text-color);
   margin: 2px;
   display: flex;
   flex-wrap: wrap;
@@ -85,21 +93,23 @@ hr {
   height: 60px;
   width: 62px;
   border-radius: 10px;
-  color: rgb(250, 84, 24);
+  color: var(--text-color);
   margin: 2px;
   display: flex;
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  background-color: rgb(17, 42, 30);
+  /* background-color: rgb(17, 42, 30); */
   /* font-size: 15px; */
 }
 
 .neutral {
+  /* background-color: rgb(95, 176, 243); */
   background-color: rgb(40, 95, 67);
 }
 
 .absent {
+  /* background-color: rgb(162, 161, 161); */
   background-color: rgb(28, 66, 47);
 }
 
