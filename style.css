@@ -5,7 +5,9 @@
 :root {
   --background-color: rgb(224, 222, 222);
   --text-color: rgb(39, 39, 75);
+  --text-color-secondary: rgb(68, 68, 112);
   --neutral-color: rgb(95, 176, 243);
+  --neutral-color-secondary: rgb(143, 203, 252);
   --absent-color: rgb(162, 161, 161);
   --present-color: rgb(239, 239, 55);
   --correct-color: rgb(47, 238, 47);
@@ -14,7 +16,9 @@
 :root.dark-mode {
   --background-color: rgb(14, 37, 26);
   --text-color: rgb(175, 62, 21);
+  --text-color-secondary: rgb(208, 87, 43);
   --neutral-color: rgb(33, 79, 55);
+  --neutral-color-secondary: rgb(52, 108, 79);
   --absent-color: rgb(23, 52, 37);
   --present-color: rgb(164, 164, 37);
   --correct-color: rgb(31, 161, 31);
@@ -29,6 +33,7 @@ body {
 #title {
   justify-self: center;
   font-size: 50px;
+  letter-spacing: 2px;
   color: var(--text-color);
   opacity: 1;
 }
@@ -69,7 +74,7 @@ body {
   align-self: center;
   font-size: 40px;
   position: relative;
-  top: -10px;
+  top: 5px;
 }
 
 hr {
@@ -123,6 +128,11 @@ hr {
 #switch input:checked + #slider::before {
   background-color: var(--text-color);
   transform: translateX(30px);
+}
+
+#switch input:checked + #slider:hover,
+#switch:hover #slider {
+  background-color: var(--neutral-color-secondary);
 }
 
 .tile {
