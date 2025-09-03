@@ -158,7 +158,7 @@ document.addEventListener('keyup', function (e) {
         // Check win condition
         if (numberCorrect === 5) {
           gameOver = true;
-          document.getElementById('title').textContent = 'YOU WIN!';
+          document.getElementById('title').textContent = 'Congratulations!';
         }
         // Move to beginning of next row
         if (row < 5) {
@@ -185,7 +185,7 @@ document.addEventListener('keyup', function (e) {
       // Triggering opacity transitions
       title.style.opacity = 0;
       setTimeout(() => {
-        title.textContent = 'YOU LOST!';
+        title.textContent = 'You lost!';
         title.style.opacity = 1;
       }, 1);
 
