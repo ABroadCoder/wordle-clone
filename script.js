@@ -1,6 +1,8 @@
 const board = document.getElementById('board');
+const toggle = document.getElementById('invisible-checkbox');
+const title = document.getElementById('title');
 
-const answer = 'HELLO';
+const answer = 'JEWEL';
 
 const keyboardContent = [
   ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -67,6 +69,11 @@ function initialize() {
 
 // Call iniitialization function to set up game
 initialize();
+
+// Change color properties when toggle switch is clicked
+toggle.addEventListener('change', function () {
+  document.documentElement.classList.toggle('dark-mode');
+});
 
 // Detect and react to key presses
 document.addEventListener('keyup', function (e) {
@@ -175,7 +182,13 @@ document.addEventListener('keyup', function (e) {
     }
 
     if (gameOver === true && numberCorrect < 5) {
-      document.getElementById('title').textContent = 'YOU LOST!';
+      // Triggering opacity transitions
+      title.style.opacity = 0;
+      setTimeout(() => {
+        title.textContent = 'YOU LOST!';
+        title.style.opacity = 1;
+      }, 1);
+
       document.getElementById('answer').style.opacity = 1;
     }
   }
